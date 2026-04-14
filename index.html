@@ -536,6 +536,137 @@
     }
 
     /* ═══════════════════════════════════════════════════════════
+       HERO IMAGE in spec card
+    ═══════════════════════════════════════════════════════════ */
+    .spec-hero {
+      width: 100%; aspect-ratio: 16/7;
+      object-fit: cover; object-position: center 40%;
+      border-radius: var(--radius-sm);
+      margin-bottom: 14px;
+      display: block;
+      background: #f0f0f0;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       GALLERY SECTION
+    ═══════════════════════════════════════════════════════════ */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      background: #e0e0e0;
+      aspect-ratio: 16/11;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+      transition: transform .3s ease;
+    }
+    .gallery-item:hover img,
+    .gallery-item:active img { transform: scale(1.04); }
+    .gallery-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.65));
+      color: #fff; font-size: 0.78rem; font-weight: 700;
+      padding: 16px 10px 8px;
+      pointer-events: none;
+    }
+    .gallery-badge {
+      position: absolute; top: 8px; left: 8px;
+      background: var(--red); color: #fff;
+      font-size: 0.68rem; font-weight: 700;
+      padding: 3px 9px; border-radius: 20px;
+      pointer-events: none;
+    }
+    .gallery-zoom {
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(255,255,255,.85);
+      border-radius: 50%; width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      pointer-events: none;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       LIGHTBOX
+    ═══════════════════════════════════════════════════════════ */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,.92);
+      align-items: center; justify-content: center;
+      padding: 16px;
+    }
+    #lightbox.show { display: flex; }
+    #lightbox img {
+      max-width: 100%; max-height: 90dvh;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 40px rgba(0,0,0,.6);
+      object-fit: contain;
+    }
+    #lb-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,.15); border: none;
+      color: #fff; font-size: 1.4rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+      transition: background .2s;
+    }
+    #lb-close:active { background: rgba(255,255,255,.3); }
+    #lb-caption {
+      position: absolute; bottom: 20px; left: 0; right: 0;
+      text-align: center; color: rgba(255,255,255,.8);
+      font-size: 0.88rem; font-weight: 600;
+    }
+    #lb-prev, #lb-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,.15); border: none;
+      color: #fff; font-size: 1.3rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+      transition: background .2s;
+    }
+    #lb-prev { left: 12px; }
+    #lb-next { right: 12px; }
+    #lb-prev:active, #lb-next:active { background: rgba(255,255,255,.3); }
+
+    /* compare page hero strip */
+    .cmp-heroes {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      margin-bottom: 14px;
+    }
+    .cmp-hero-card {
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); cursor: pointer;
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .cmp-hero-card img {
+      width: 100%; aspect-ratio: 16/9;
+      object-fit: cover; object-position: center 35%;
+      display: block; transition: transform .3s;
+    }
+    .cmp-hero-card:hover img { transform: scale(1.03); }
+    .cmp-hero-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.7));
+      color: #fff; font-size: 0.9rem; font-weight: 700;
+      padding: 20px 12px 10px; text-align: center;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
        UTILITIES
     ═══════════════════════════════════════════════════════════ */
     .mt-14 { margin-top: 14px; }
@@ -636,6 +767,8 @@
       <!-- N50 -->
       <div class="spec-pane tab-n50 active" id="pane-n50">
         <div class="spec-card">
+          <img class="spec-hero" src="images/n50-page1.jpg" alt="JAC N50"
+               onclick="openLb(0)" style="cursor:pointer;" />
           <h2>JAC N50</h2>
           <div class="tagline">轻型城市货运首选</div>
           <table class="spec-table">
@@ -664,6 +797,8 @@
       <!-- N80 -->
       <div class="spec-pane tab-n80" id="pane-n80">
         <div class="spec-card">
+          <img class="spec-hero" src="images/n80-page1.jpg" alt="JAC N80"
+               onclick="openLb(2)" style="cursor:pointer;" />
           <h2>JAC N80</h2>
           <div class="tagline">中型重载运输利器</div>
           <table class="spec-table">
@@ -689,6 +824,35 @@
       </div>
 
     </div><!-- /.spec-grid -->
+
+    <!-- Gallery -->
+    <div class="sec-title mt-14">📸 产品图册</div>
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openLb(0)">
+        <img src="images/n50-page1.jpg" alt="N50 正面" loading="lazy" />
+        <div class="gallery-badge">N50</div>
+        <div class="gallery-label">N50 · 产品正面</div>
+        <div class="gallery-zoom">🔍</div>
+      </div>
+      <div class="gallery-item" onclick="openLb(1)">
+        <img src="images/n50-page2.jpg" alt="N50 规格页" loading="lazy" />
+        <div class="gallery-badge">N50</div>
+        <div class="gallery-label">N50 · 规格详情</div>
+        <div class="gallery-zoom">🔍</div>
+      </div>
+      <div class="gallery-item" onclick="openLb(2)">
+        <img src="images/n80-page1.jpg" alt="N80 正面" loading="lazy" />
+        <div class="gallery-badge">N80</div>
+        <div class="gallery-label">N80 · 产品正面</div>
+        <div class="gallery-zoom">🔍</div>
+      </div>
+      <div class="gallery-item" onclick="openLb(3)">
+        <img src="images/n80-page2.jpg" alt="N80 规格页" loading="lazy" />
+        <div class="gallery-badge">N80</div>
+        <div class="gallery-label">N80 · 规格详情</div>
+        <div class="gallery-zoom">🔍</div>
+      </div>
+    </div>
 
     <!-- WhatsApp generator -->
     <div class="sec-title mt-14">💬 生成 WhatsApp 报价文案</div>
@@ -738,6 +902,18 @@
   <div class="page" id="page-compare">
 
     <div class="sec-title">🔍 N50 vs N80 — 规格对比</div>
+
+    <!-- Hero images on compare page -->
+    <div class="cmp-heroes">
+      <div class="cmp-hero-card" onclick="openLb(0)">
+        <img src="images/n50-page1.jpg" alt="JAC N50" loading="lazy" />
+        <div class="cmp-hero-label">JAC N50</div>
+      </div>
+      <div class="cmp-hero-card" onclick="openLb(2)">
+        <img src="images/n80-page1.jpg" alt="JAC N80" loading="lazy" />
+        <div class="cmp-hero-label">JAC N80</div>
+      </div>
+    </div>
 
     <div class="cmp-wrap">
       <table class="cmp-table">
@@ -861,6 +1037,17 @@
     <span class="bn-label">型号对比</span>
   </div>
 </nav>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     LIGHTBOX
+════════════════════════════════════════════════════════════════════════════ -->
+<div id="lightbox" onclick="lbBgClick(event)">
+  <button id="lb-close" onclick="closeLb()">✕</button>
+  <button id="lb-prev"  onclick="lbNav(-1)">‹</button>
+  <img id="lb-img" src="" alt="" />
+  <button id="lb-next"  onclick="lbNav(1)">›</button>
+  <div id="lb-caption"></div>
+</div>
 
 <script>
 /* ── Drawer (mobile sidebar) ─────────────────────────────────────────────── */
@@ -1020,6 +1207,55 @@ function updateRec(val) {
     ? `货物约 ${kg.toLocaleString()} KG，N50（GVW 5,000 KG）完全满足，车身灵活，适合城市配送及短途运输。`
     : `货物约 ${kg.toLocaleString()} KG，建议 N80（GVW 7,500 KG），载重充裕，154 ps 强劲动力，适合中长途重载运输。`;
 }
+
+/* ── Lightbox ────────────────────────────────────────────────────────────── */
+const LB_IMAGES = [
+  { src: 'images/n50-page1.jpg', caption: 'JAC N50 · 产品正面' },
+  { src: 'images/n50-page2.jpg', caption: 'JAC N50 · 规格详情' },
+  { src: 'images/n80-page1.jpg', caption: 'JAC N80 · 产品正面' },
+  { src: 'images/n80-page2.jpg', caption: 'JAC N80 · 规格详情' },
+];
+let lbIdx = 0;
+
+function openLb(idx) {
+  lbIdx = idx;
+  const lb = document.getElementById('lightbox');
+  lb.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  renderLb();
+}
+function renderLb() {
+  const item = LB_IMAGES[lbIdx];
+  document.getElementById('lb-img').src        = item.src;
+  document.getElementById('lb-caption').textContent = `${item.caption}  (${lbIdx+1}/${LB_IMAGES.length})`;
+}
+function closeLb() {
+  document.getElementById('lightbox').classList.remove('show');
+  document.body.style.overflow = '';
+}
+function lbNav(dir) {
+  lbIdx = (lbIdx + dir + LB_IMAGES.length) % LB_IMAGES.length;
+  renderLb();
+}
+function lbBgClick(e) {
+  if (e.target === document.getElementById('lightbox')) closeLb();
+}
+// swipe support
+let lbTouchX = null;
+document.getElementById('lightbox').addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+document.getElementById('lightbox').addEventListener('touchend', e => {
+  if (lbTouchX === null) return;
+  const dx = e.changedTouches[0].clientX - lbTouchX;
+  if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+  lbTouchX = null;
+});
+// keyboard
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('show')) return;
+  if (e.key === 'ArrowRight') lbNav(1);
+  if (e.key === 'ArrowLeft')  lbNav(-1);
+  if (e.key === 'Escape')     closeLb();
+});
 
 /* ── Init ────────────────────────────────────────────────────────────────── */
 window.addEventListener('resize', applyLayout);
